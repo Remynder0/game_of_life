@@ -69,7 +69,7 @@ class Animal(Element):
         self.__life_max=life_max
         self.__age=0
         self.__gender=random.randint(0, 1)
-        self.__bar_life=[int(),int()]
+        self.__bar_life=[life_max,life_max]
         self.__current_direction=[random.randint(-1, 1),random.randint(-1, 1)]
 
 
@@ -111,9 +111,9 @@ class Animal(Element):
 
         if life<life_max:
             if life_max-life<value:
-                self.__bar__life[0]=self.__bar_life[1]
+                self.__bar_life[0]=life_max
             else:
-                self.__bar_life=self.__bar_life[0]+value
+                self.__bar_life=life+value
 
     def losing_life(self,value):
         # variable temp
@@ -121,9 +121,9 @@ class Animal(Element):
 
         if life>0:
             if life<value:
-                self.__bar__life[0]=0
+                self.__bar_life[0]=0
             else:
-                self.__bar_life=self.__bar_life-value
+                self.__bar_life=life-value
 
 
     ########### direction ############            
