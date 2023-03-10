@@ -139,7 +139,7 @@ class Animal(Element):
     
 
 class Mouse(Animal):
-    def __init__(self, name, char_repr, life_max):
+    def __init__(self, name="Mouse", char_repr="\U0001F42D", life_max=2):
         super().__init__(name, char_repr, life_max)
 
 class Lion(Animal):
