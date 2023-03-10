@@ -82,7 +82,7 @@ class Animal(Element):
     def get_gender(self):
         if self.__gender:
             return "mâle"
-        else:
+        else:   
             return "femelle"
     
 
@@ -150,5 +150,50 @@ class Dragon(Animal):
         super().__init__(name, char_repr, life_max)
 
 class Cow(Animal):
+    def __init__(self, name, char_repr, life_max):
+        super().__init__(name, char_repr, life_max)
+
+
+
+
+
+
+
+
+
+class Cow(Animal):
+    def __init__(self, name, char_repr, life_max):
+        super().__init__(name, char_repr, life_max)
+
+class Pig(Animal):
+    def __init__(self, name, char_repr, life_max):
+        super().__init__(name, char_repr, life_max)
+
+class Sheep(Animal):
+    def __init__(self, name, char_repr, life_max):
+        super().__init__(name, char_repr, life_max)
+
+class Bunny(Animal):
+    def __init__(self, name, char_repr, life_max):
+        super().__init__(name, char_repr, life_max)
+
+class Fish(Animal):
+    def __init__(self, name, char_repr, life_max):
+        super().__init__(name, char_repr, life_max)
+
+class Bear(Animal):
+    def __init__(self, name, char_repr, life_max):
+        super().__init__(name, char_repr, life_max)
+
+class Wolf(Animal):
+    def __init__(self, name, char_repr, life_max):
+        super().__init__(name, char_repr, life_max)
+
+class Snake(Animal):
+    def __init__(self, name, char_repr, life_max):
+        super().__init__(name, char_repr, life_max)
+
+class Falcon(Animal):
+    def __init__(self, name, char_repr, life_max):
     def __init__(self, name="Cow", char_repr="\U0001F42E", life_max=5):
         super().__init__(name, char_repr, life_max)
