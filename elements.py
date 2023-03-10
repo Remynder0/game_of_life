@@ -35,7 +35,7 @@ class Element:
         return f"{self.__char_repr}"
     
     def __repr__(self) -> str:
-        return f"{self.get_char_repr()} : {self.get_name()} {self.get_id()}"
+        return f"{self.get_char_repr()} : {self.get_name()} n°{self.get_id()}"
 
 
 
@@ -45,21 +45,20 @@ class Ground(Element):
 
 
 class Resource(Element):
-    def __init__(self, name, char_repr,value):
+    def __init__(self, name, char_repr):
         super().__init__(name, char_repr)
-        self.__value=value
-    
-    def get_value(self):
-        return self.__value
+
+    def __repr__(self) -> str:
+        return f"{super().__repr__()} ({self.get_id()})"
 
 
 class Herb(Resource):
-    def __init__(self, name, char_repr, value):
-        super().__init__(name, char_repr, value)
+    def __init__(self, name="Herb", char_repr="\U0001F33F"):
+        super().__init__(name, char_repr)
 
 class Water(Resource):
-    def __init__(self, name, char_repr, value):
-        super().__init__(name, char_repr, value)
+    def __init__(self, name="Water", char_repr="\U0001F41F"):
+        super().__init__(name, char_repr,)
 
 
 class Animal(Element):
@@ -113,7 +112,7 @@ class Animal(Element):
             if life_max-life<value:
                 self.__bar_life[0]=life_max
             else:
-                self.__bar_life=life+value
+                self.__bar_life[0]=life+value
 
     def losing_life(self,value):
         # variable temp
@@ -123,7 +122,7 @@ class Animal(Element):
             if life<value:
                 self.__bar_life[0]=0
             else:
-                self.__bar_life=life-value
+                self.__bar_life[0]=life-value
 
 
     ########### direction ############            
@@ -135,7 +134,7 @@ class Animal(Element):
 
     ########### représentation ############ 
     def __repr__(self) -> str:
-        return f"{super().__repr__()} ({self.get_gender()} de {self.get_age()}(s))\n - Barre de vie : {self.get_life()}/{self.get_life_max()}"
+        return f"{super().__repr__()} ({self.get_gender()} de {self.get_age()} an(s))\n - Barre de vie : {self.get_life()}/{self.get_life_max()}"
     
 
 class Mouse(Animal):
@@ -143,13 +142,13 @@ class Mouse(Animal):
         super().__init__(name, char_repr, life_max)
 
 class Lion(Animal):
-    def __init__(self, name, char_repr, life_max):
+    def __init__(self, name="Lion", char_repr="\U0001F981", life_max=10):
         super().__init__(name, char_repr, life_max)
 
 class Dragon(Animal):
-    def __init__(self, name, char_repr, life_max):
+    def __init__(self, name="Dragon", char_repr="\U0001F432", life_max=20):
         super().__init__(name, char_repr, life_max)
 
 class Cow(Animal):
-    def __init__(self, name, char_repr, life_max):
+    def __init__(self, name="Cow", char_repr="\U0001F42E", life_max=5):
         super().__init__(name, char_repr, life_max)
