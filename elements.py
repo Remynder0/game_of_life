@@ -150,7 +150,7 @@ class Dragon(Animal):
         super().__init__(name, char_repr, life_max)
 
 class Cow(Animal):
-    def __init__(self, name, char_repr, life_max):
+    def __init__(self, name="Cow", char_repr="\U0001F42E", life_max=5):
         super().__init__(name, char_repr, life_max)
 
 
@@ -195,5 +195,4 @@ class Snake(Animal):
 
 class Falcon(Animal):
     def __init__(self, name, char_repr, life_max):
-    def __init__(self, name="Cow", char_repr="\U0001F42E", life_max=5):
         super().__init__(name, char_repr, life_max)
