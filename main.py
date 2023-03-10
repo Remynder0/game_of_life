@@ -1,8 +1,17 @@
 
 import random
 from config import *
-from elements import Ground , Herb , Water , Cow, Mouse , Lion , Dragon
-from planets import PlanetAlpha
+from elements import *
+from planets import *
+
+print(Ground())
+print(Resource("Water","W",10))
+a = Animal ( "Dragon", "D",30)
+a.ageing()
+a.losing_life(10)
+a.recovering_life(5)
+a.get_ids_counts()
+print(a)
 
 if __name__ == "__main__" :
     random.seed (1000)
