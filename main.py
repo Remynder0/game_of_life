@@ -1,8 +1,7 @@
 
 import random
-from config import *
-from elements import *
-from planets import *
+from elements import Ground , Herb , Water , Cow, Mouse , Lion , Dragon
+from planets import PlanetAlpha
 
 if __name__ == "__main__" :
     random.seed (1000)
