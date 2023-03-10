@@ -1,9 +1,4 @@
-
 import random
-
-
-
-
 
 class Element:
 
@@ -22,7 +17,7 @@ class Element:
         self.__id=self.__ids_counts+1
         Element.incr_ids_counts(Element)
         
-        
+
 
 
     def get_name(self):
