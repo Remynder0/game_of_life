@@ -15,20 +15,22 @@ class PlanetAlpha(Grid):
 
 
     def get_current_animals_count(self):
-        pass
+        return self.__current_animals_count
 
     def incr_current_animals_count(self):
-        pass
+        self.__current_animals_count+=1
 
     def decr_current_animals_count(self):
-        pass
+        self.__current_animals_count-=1
 
     def get_ground(self):
-        pass
+        return self.__ground
 
     def is_free_place(self, cell_number):
-        pass
-
+        if self.get_cell(cell_number)==None :
+            return True
+        else : return False
+        
     def get_random_free__place(self):
         pass
 
