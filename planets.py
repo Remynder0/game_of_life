@@ -1,4 +1,8 @@
 from grid import Grid
+import random
+from config import *
+
+
 
 class PlanetAlpha(Grid):
 
@@ -32,13 +36,21 @@ class PlanetAlpha(Grid):
         else : return False
         
     def get_random_free__place(self):
-        pass
+        for i in range(PLANET_LATITUDE_CELLS_COUNT*PLANET_LONGITUDE_CELLS_COUNT):
+            x=random.randint(PLANET_LATITUDE_CELLS_COUNT*PLANET_LONGITUDE_CELLS_COUNT)
+            if self.is_free_place(x):
+                return x
+        return -1
 
     def place_resources(self, list):
-        pass
+        for el in list:
+            x=self.get_random_free__place()
+            self.set_cell(x,list[el])
 
-    def place_animals(self):
-        pass
+    def place_animals(self,list):
+        for el in list:
+            x=self.get_random_free__place()
+            self.set_cell(x,list[el])
 
     def get_grid_char_repr(self):
         pass
