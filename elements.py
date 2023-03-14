@@ -157,37 +157,42 @@ class Cow(Animal):
 
 
 class Cow(Animal):
-    def __init__(self, name, char_repr, life_max):
-        super().__init__(name, char_repr, life_max)
+    def __init__(self, name="Cow", life_max=10):
+        super().__init__(name, life_max)
 
 class Pig(Animal):
-    def __init__(self, name, char_repr, life_max):
-        super().__init__(name, char_repr, life_max)
+    def __init__(self, name="Pig", life_max=8):
+        super().__init__(name, life_max)
 
 class Sheep(Animal):
-    def __init__(self, name, char_repr, life_max):
-        super().__init__(name, char_repr, life_max)
+    def __init__(self, name="Sheep", life_max=8):
+        super().__init__(name, life_max)
 
 class Bunny(Animal):
-    def __init__(self, name, char_repr, life_max):
-        super().__init__(name, char_repr, life_max)
+    def __init__(self, name="Bunny", life_max=1):
+        super().__init__(name, life_max)
 
 class Fish(Animal):
-    def __init__(self, name, char_repr, life_max):
-        super().__init__(name, char_repr, life_max)
+    def __init__(self, name="Fish", life_max=1):
+        super().__init__(name, life_max)
 
 class Bear(Animal):
-    def __init__(self, name, char_repr, life_max):
-        super().__init__(name, char_repr, life_max)
+    def __init__(self, name="Bear", life_max=30):
+        super().__init__(name, life_max)
 
 class Wolf(Animal):
-    def __init__(self, name, char_repr, life_max):
-        super().__init__(name, char_repr, life_max)
+    def __init__(self, name="Wolf", life_max=15):
+        super().__init__(name, life_max)
 
 class Snake(Animal):
-    def __init__(self, name, char_repr, life_max):
-        super().__init__(name, char_repr, life_max)
+    def __init__(self, name="Snake", life_max=2):
+        super().__init__(name, life_max)
 
 class Falcon(Animal):
-    def __init__(self, name, char_repr, life_max):
-        super().__init__(name, char_repr, life_max)
+    def __init__(self, name="Falcon", life_max=2):
+        super().__init__(name, life_max)
+
+class Human(Animal):
+    def __init__(self, name="Human", life_max=10):
+        super().__init__(name, life_max)
+        self.__inventory = []
