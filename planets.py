@@ -53,7 +53,15 @@ class PlanetAlpha(Grid):
             self.set_cell(x,list[el])
 
     def get_grid_char_repr(self):
-        pass
+        grid_char= [["."
+                      for _ in range(self.columns_count)]
+                     for _ in range(self.lines_count)]
+        for lat in range(PLANET_LATITUDE_CELLS_COUNT):
+            for lon in range(PLANET_LONGITUDE_CELLS_COUNT):
+                grid_el=self.get_cell_number_from_coordinates(lat,lon)
+                grid_char[lat][lon]=(grid_el.get_char_repr())
+        return grid_char
+
 
     def get_count(self, value):
         pass
