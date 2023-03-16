@@ -1,6 +1,7 @@
 from grid import Grid
 import random
 from config import *
+from elements import *
 
 
 
@@ -11,13 +12,17 @@ class PlanetAlpha(Grid):
     CARDINAL_POINTS = (NORTH, EAST, SOUTH, WEST)
     WIND_ROSE = (NORTH,NORTH_EAST, EAST, SOUTH_EAST, SOUTH, SOUTH_WEST, WEST,NORTH_WEST)
 
-    def __init__ (self,longitude_cells_count, latitude_cells_count, ground):
+    def __init__ (self,name,longitude_cells_count, latitude_cells_count, ground):
+        self.__name=name
         grid_init = [[ground] * longitude_cells_count for _ in range(latitude_cells_count)]
         Grid.__init__(self, grid_init)
         self.__current_animals_count = 0
         self.__ground = ground
 
 
+    def get_name(self):
+        return self.__name
+    
     def get_current_animals_count(self):
         return self.__current_animals_count
 
@@ -36,8 +41,8 @@ class PlanetAlpha(Grid):
         else : return False
         
     def get_random_free__place(self):
-        for i in range(PLANET_LATITUDE_CELLS_COUNT*PLANET_LONGITUDE_CELLS_COUNT):
-            x=random.randint(PLANET_LATITUDE_CELLS_COUNT*PLANET_LONGITUDE_CELLS_COUNT)
+        for i in range(self.columns_count*self.lines_count-1):
+            x=random.randint(0,self.columns_count*self.lines_count-1)
             if self.is_free_place(x):
                 return x
         return -1
@@ -45,17 +50,17 @@ class PlanetAlpha(Grid):
     def place_resources(self, list):
         for el in list:
             x=self.get_random_free__place()
-            self.set_cell(x,list[el])
+            if x>0:
+                self.set_cell(x,el)
 
     def place_animals(self,list):
         for el in list:
             x=self.get_random_free__place()
-            self.set_cell(x,list[el])
+            if x>0:
+                self.set_cell(x,el)
 
     def get_grid_char_repr(self):
-        grid_char= [["."
-                      for _ in range(self.columns_count)]
-                     for _ in range(self.lines_count)]
+        grid_char= [[Ground()] * PLANET_LONGITUDE_CELLS_COUNT for _ in range(PLANET_LATITUDE_CELLS_COUNT)]
         for lat in range(PLANET_LATITUDE_CELLS_COUNT):
             for lon in range(PLANET_LONGITUDE_CELLS_COUNT):
                 grid_el=self.get_cell_number_from_coordinates(lat,lon)

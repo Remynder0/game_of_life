@@ -154,7 +154,7 @@ class Cow(Animal):
 
 
 
-
+"""
 
 class Cow(Animal):
     def __init__(self, name="Cow", life_max=10):
@@ -196,3 +196,7 @@ class Human(Animal):
     def __init__(self, name="Human", life_max=10):
         super().__init__(name, life_max)
         self.__inventory = []
+
+
+
+        """

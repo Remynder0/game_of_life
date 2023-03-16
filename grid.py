@@ -2,6 +2,7 @@
 
 import random
 import turtle
+from elements import *
 
 
 class Grid:
@@ -32,7 +33,7 @@ class Grid:
     def get_line_str(self, line_number, separator='\t'):
         """ Retourne la chaine de caractère correspondant à la concaténation des valeurs de la ligne numéro
         'line_number' de la grille. Les caractères sont séparés par le caractère 'separator'."""
-        return separator.join(str(value)
+        return separator.join(str(value.get_char_repr())
                               for value in self.grid[line_number])
 
     def get_grid_str(self, separator='\t'):
