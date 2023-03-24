@@ -34,14 +34,20 @@ class Stone(Resource):
         super.__init__(durability)
         self.__image = pygame.image.load("image/stone.png").convert_alpha()
         
-class Herb(Resource):
-    pass
+class Plant(Resource):
+    def __init__(self, durability=2):
+        super.__init__(durability) 
+        self.__image = pygame.image.load("image/plant.png").convert_alpha()
 
 class Iron(Resource):
-    pass
+    def __init__(self,durability=12):
+        super.__init__(durability)
+        self.__image = pygame.image.load("image/stone.png").convert_alpha()
 
 class Three(Resource):
-    pass
+    def __init__(self, durability=5):
+        super.__init__(durability) 
+        self.__image = pygame.image.load("image/three.png").convert_alpha()
 
 
 class Animal(Element):
