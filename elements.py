@@ -45,7 +45,7 @@ class Iron(Resource):
         self.__image = pygame.image.load("image/stone.png").convert_alpha()
 
 class Three(Resource):
-    def __init__(self, durability=5):
+    def __init__(self, durability=6):
         super.__init__(durability) 
         self.__image = pygame.image.load("image/three.png").convert_alpha()
 
