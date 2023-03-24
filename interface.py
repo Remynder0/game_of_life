@@ -1,8 +1,8 @@
-class Home():
+class Home:
     pass
 
-class Setting():
+class Setting:
     pass
 
-class Game():
+class Game:
     pass
