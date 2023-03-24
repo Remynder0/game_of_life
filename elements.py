@@ -1,6 +1,8 @@
+#### importation ######
 import random
+import pygame
 
-class Element:
+class Element(pygame.sprite.Sprite):
 
     __ids_counts=0
 
@@ -11,49 +13,35 @@ class Element:
         cls.__ids_counts+=1
 
     
-    def __init__(self,name,char_repr):
-        self.__name=name
-        self.__char_repr=char_repr
+    def __init__(self):
+        super.__init__()
+        self.rect = self.image.get_rect()
         self.__id=self.__ids_counts+1
         Element.incr_ids_counts(Element)
         
-
-
-
-    def get_name(self):
-        return f"{self.__name}"
-    
     def get_id(self):
         return self.__id
-
-    def get_char_repr(self):
-        return f"{self.__char_repr}"
-    
-    def __repr__(self) -> str:
-        return f"{self.get_char_repr()} : {self.get_name()} n°{self.get_id()}"
-
-
-
-class Ground(Element):
-    def __init__(self, name="Ground", char_repr="."):
-        super().__init__(name, char_repr)
+   
 
 
 class Resource(Element):
-    def __init__(self, name, char_repr):
-        super().__init__(name, char_repr)
+   def __init__(self,durability):
+        super.__init__()
+        self.__durability=durability
 
-    def __repr__(self) -> str:
-        return f"{super().__repr__()} ({self.get_id()})"
-
-
+class Stone(Resource):
+    def __init__(self,durability=10):
+        super.__init__(durability)
+        self.__image = pygame.image.load("image/stone.png").convert_alpha()
+        
 class Herb(Resource):
-    def __init__(self, name="Herb", char_repr="\U0001F33F"):
-        super().__init__(name, char_repr)
+    pass
 
-class Water(Resource):
-    def __init__(self, name="Water", char_repr="\U0001F41F"):
-        super().__init__(name, char_repr,)
+class Iron(Resource):
+    pass
+
+class Three(Resource):
+    pass
 
 
 class Animal(Element):
@@ -132,29 +120,6 @@ class Animal(Element):
         return f"{super().__repr__()} ({self.get_gender()} de {self.get_age()} an(s))\n - Barre de vie : {self.get_life()}/{self.get_life_max()}"
     
 
-class Mouse(Animal):
-    def __init__(self, name="Mouse", char_repr="\U0001F42D", life_max=2):
-        super().__init__(name, char_repr, life_max)
-
-class Lion(Animal):
-    def __init__(self, name="Lion", char_repr="\U0001F981", life_max=10):
-        super().__init__(name, char_repr, life_max)
-
-class Dragon(Animal):
-    def __init__(self, name="Dragon", char_repr="\U0001F432", life_max=20):
-        super().__init__(name, char_repr, life_max)
-
-class Cow(Animal):
-    def __init__(self, name="Cow", char_repr="\U0001F42E", life_max=5):
-        super().__init__(name, char_repr, life_max)
-
-
-
-
-
-
-
-"""
 
 class Cow(Animal):
     def __init__(self, name="Cow", life_max=10):
@@ -198,5 +163,3 @@ class Human(Animal):
         self.__inventory = []
 
 
-
-        """
