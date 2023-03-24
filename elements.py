@@ -52,13 +52,12 @@ class Three(Resource):
 
 class Animal(Element):
 
-    def __init__(self, name, char_repr, life_max):
-        super().__init__(name, char_repr)
+    def __init__(self, life_max):
+        super().__init__()
         self.__life_max=life_max
         self.__age=0
         self.__gender=random.randint(0, 1)
         self.__bar_life=[life_max,life_max]
-        self.__current_direction=[random.randint(-1, 1),random.randint(-1, 1)]
 
 
     ############# age/genre #############
