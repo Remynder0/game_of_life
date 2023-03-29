@@ -138,7 +138,7 @@ class Sheep(Animal):
     def __init__(self, name="Sheep", life_max=8):
         super().__init__(name, life_max)
 
-class Bunny(Animal):
+class Rabbit(Animal):
     def __init__(self, name="Bunny", life_max=1):
         super().__init__(name, life_max)
 
