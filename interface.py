@@ -1,3 +1,11 @@
+############## importation ###############
+import random
+import pygame
+from elements import *
+from terrain import *
+from config import *
+##########################################
+
 class Home:
     
     def __init__(self, largeur, longueur):
@@ -21,8 +29,7 @@ class Home:
 
 class Setting:
     
-    def __init__(self, largeur, longueur, config):
-        self.__config = config
+    def __init__(self, largeur, longueur):
         self.screen = (largeur, longueur)
         self.font = Font()
         self.bouton = None

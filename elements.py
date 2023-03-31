@@ -13,8 +13,9 @@ class Element(pygame.sprite.Sprite):
         cls.__ids_counts+=1
 
     
-    def __init__(self):
+    def __init__(self,name):
         super.__init__()
+        self.name=name
         self.rect = self.image.get_rect()
         self.__id=self.__ids_counts+1
         Element.incr_ids_counts(Element)
@@ -25,35 +26,35 @@ class Element(pygame.sprite.Sprite):
 
 
 class Resource(Element):
-   def __init__(self,durability):
-        super.__init__()
+   def __init__(self,durability,name):
+        super.__init__(name)
         self.__durability=durability
 
 class Stone(Resource):
-    def __init__(self,durability=10):
-        super.__init__(durability)
+    def __init__(self,name="Stone",durability=10):
+        super.__init__(durability,name)
         self.__image = pygame.image.load("image/stone.png").convert_alpha()
         
 class Plant(Resource):
-    def __init__(self, durability=2):
-        super.__init__(durability) 
+    def __init__(self,name="Plant", durability=2):
+        super.__init__(durability,name) 
         self.__image = pygame.image.load("image/plant.png").convert_alpha()
 
 class Iron(Resource):
-    def __init__(self,durability=12):
+    def __init__(self,name="Iron",durability=12):
         super.__init__(durability)
         self.__image = pygame.image.load("image/stone.png").convert_alpha()
 
 class Three(Resource):
-    def __init__(self, durability=6):
+    def __init__(self,name="Iron", durability=6):
         super.__init__(durability) 
         self.__image = pygame.image.load("image/three.png").convert_alpha()
 
 
 class Animal(Element):
 
-    def __init__(self, life_max):
-        super().__init__()
+    def __init__(self,life_max,name):
+        super.__init__(name)
         self.__life_max=life_max
         self.__age=0
         self.__gender=random.randint(0, 1)
@@ -113,58 +114,77 @@ class Animal(Element):
                 self.__bar_life[0]=life-value
 
 
-    ########### direction ############            
-    def get_current_direction(self):
-        return self.__current_direction
-    
-    def set_direction(self,line,column):
-        self.__current_direction=[line,column]
-
-    ########### représentation ############ 
-    def __repr__(self) -> str:
-        return f"{super().__repr__()} ({self.get_gender()} de {self.get_age()} an(s))\n - Barre de vie : {self.get_life()}/{self.get_life_max()}"
+    ########### mouvement ############            
+    def movement():
+        pass
     
 
 
 class Cow(Animal):
     def __init__(self, name="Cow", life_max=10):
         super().__init__(name, life_max)
+        self.__image = pygame.image.load("image/cow.png").convert_alpha()
+
 
 class Pig(Animal):
     def __init__(self, name="Pig", life_max=8):
         super().__init__(name, life_max)
+        self.__image = pygame.image.load("image/pig.png").convert_alpha()
+
 
 class Sheep(Animal):
     def __init__(self, name="Sheep", life_max=8):
         super().__init__(name, life_max)
+        self.__image = pygame.image.load("image/sheep.png").convert_alpha()
+
 
 class Rabbit(Animal):
     def __init__(self, name="Bunny", life_max=1):
         super().__init__(name, life_max)
+        self.__image = pygame.image.load("image/rabbit.png").convert_alpha()
 
 class Fish(Animal):
+    __poisson=('Basile','Emile')
     def __init__(self, name="Fish", life_max=1):
         super().__init__(name, life_max)
+        self.__image = pygame.image.load(f"image/fish{self.__poisson[random.randint(0, 1)]}.png").convert_alpha()
+
 
 class Bear(Animal):
     def __init__(self, name="Bear", life_max=30):
         super().__init__(name, life_max)
+        self.__image = pygame.image.load("image/bear.png").convert_alpha()
 
 class Wolf(Animal):
     def __init__(self, name="Wolf", life_max=15):
         super().__init__(name, life_max)
+        self.__image = pygame.image.load("image/wolf.png").convert_alpha()
 
 class Snake(Animal):
     def __init__(self, name="Snake", life_max=2):
         super().__init__(name, life_max)
+        self.__image = pygame.image.load("image/snake.png").convert_alpha()
+
+    def poisoned():
+        pass
+
+
+class Car(Animal):
+    def __init__(self, name="Car", life_max=100):
+        super().__init__(name, life_max)
+        self.__image = pygame.image.load("image/car.png").convert_alpha()
+
 
 class Falcon(Animal):
     def __init__(self, name="Falcon", life_max=2):
         super().__init__(name, life_max)
+        self.__image = pygame.image.load("image/falcon.png").convert_alpha()
+
 
 class Human(Animal):
     def __init__(self, name="Human", life_max=10):
         super().__init__(name, life_max)
+        self.__image = pygame.image.load("image/gru.png").convert_alpha()
         self.__inventory = []
 
 

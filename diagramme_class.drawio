@@ -60,7 +60,7 @@
                         <mxPoint x="505" y="1220" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="12" value="Snake&lt;br style=&quot;font-size: 18px;&quot;&gt;&lt;br style=&quot;font-size: 18px;&quot;&gt;-poison&lt;br style=&quot;font-size: 18px;&quot;&gt;&lt;br style=&quot;font-size: 18px;&quot;&gt;__init__(poison:int)&lt;br style=&quot;font-size: 18px;&quot;&gt;poison: int" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;fillColor=#a0522d;fontColor=#000000;strokeColor=#6D1F00;verticalAlign=top;" parent="1" vertex="1">
+                <mxCell id="12" value="Snake&lt;br style=&quot;font-size: 18px;&quot;&gt;&lt;br style=&quot;font-size: 18px;&quot;&gt;-image: PNG&lt;br style=&quot;font-size: 18px;&quot;&gt;&lt;br style=&quot;font-size: 18px;&quot;&gt;__init__():&lt;br&gt;&lt;br&gt;poisoned():void" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;fillColor=#a0522d;fontColor=#000000;strokeColor=#6D1F00;verticalAlign=top;" parent="1" vertex="1">
                     <mxGeometry x="450" y="1350" width="160" height="160" as="geometry"/>
                 </mxCell>
                 <mxCell id="13" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;fontSize=18;fontColor=#000000;" parent="1" source="12" target="5" edge="1">

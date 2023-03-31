@@ -1,3 +1,9 @@
+############## importation ###############
+import random
+import pygame
+from elements import *
+##########################################
+
 class Terrain:
 
     def __init__(self, height, weight):
