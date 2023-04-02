@@ -186,5 +186,10 @@ class Human(Animal):
         super().__init__(name, life_max)
         self.__image = pygame.image.load("image/gru.png").convert_alpha()
         self.__inventory = []
+        self.arms=0
+        self.tools=0
 
+        
+    def crafting():
+        pass
 
