@@ -1,23 +1,24 @@
 import pygame
+import config
 
 pygame.init()
 
 # Définir les couleurs
 BLANC = (255, 255, 255)
 NOIR = (0, 0, 0)
+MARRON = (164, 82, 33)
 
 # Définir la taille de la fenêtre
-taille_fenetre = (1080, 720)
+WIDTH= config.WIDTH; HEIGHT= config.HEIGHT
+taille_fenetre = (WIDTH, HEIGHT)
 fenetre = pygame.display.set_mode(taille_fenetre)
-
-MOUTON_COUNT = 5
 
 
 
 
 def home_page():
-    fond_home = pygame.image.load('image/game.png')
-    fond_home = pygame.transform.scale(fond_home ,(1080,720))
+    fond_home = pygame.image.load('image/accueil.png')
+    fond_home = pygame.transform.scale(fond_home ,(WIDTH,HEIGHT))
     fenetre.blit(fond_home, (0,0))
 
     # Définir les dimensions et la position du bouton
@@ -62,23 +63,26 @@ def home_page():
 def setting_page():
     print("ok")
     fond_settings = pygame.image.load('image/settings.png')
-    fond_settings= pygame.transform.scale(fond_settings ,(1080,720))
+    fond_settings= pygame.transform.scale(fond_settings ,(WIDTH,HEIGHT))
     fenetre.blit(fond_settings, (0,0))
 
     # Définir les dimensions et la position du bouton
-    largeur_bouton =  55
-    hauteur_bouton = 55
-    position_bouton_quit = pygame.Rect(820, 45, largeur_bouton, hauteur_bouton)
-    position_bouton_add = pygame.Rect(400, 400, largeur_bouton, hauteur_bouton)
+    position_bouton_quit = pygame.Rect(818, 44, 60, 60)
+    position_bouton_addSheep = pygame.Rect(490, 399, 30, 50)
+    position_bouton_addCow = pygame.Rect(490, 193, 30, 50)
     
     pygame.draw.rect(fenetre, BLANC, position_bouton_quit,1)
-    pygame.draw.rect(fenetre, BLANC, position_bouton_add,1)
+    pygame.draw.rect(fenetre, BLANC, position_bouton_addSheep,1)
+    pygame.draw.rect(fenetre, BLANC, position_bouton_addCow,1)
+
 
 
     # Définir le texte des options
     police = pygame.font.SysFont("Arial", 50)
-    texte = police.render(f"{MOUTON_COUNT}", True, NOIR)
-    fenetre.blit(texte, (370, 410))
+    nb_sheep = police.render(f"{config.SHEEP_COUNT}", True, NOIR)
+    fenetre.blit(nb_sheep, (370, 410))
+    nb_cow = police.render(f"{config.COW_COUNT}", True, NOIR)
+    fenetre.blit(nb_cow, (370, 203))
 
     RUN=True
     while RUN:
@@ -94,15 +98,26 @@ def setting_page():
                 if position_bouton_quit.collidepoint(event.pos):
                     print("bouton Quit !")
                     RUN = False
-                if position_bouton_add.collidepoint(event.pos):
-                    MOUTON_COUNT+=1
-                    texte = police.render(f"{MOUTON_COUNT}", False, NOIR)
-                    print(f"bouton mouton : {MOUTON_COUNT}")
-                    
+                if position_bouton_addSheep.collidepoint(event.pos):
+                    config.SHEEP_COUNT+=1
+                    pygame.draw.rect(fenetre, MARRON, pygame.Rect(350, 405, 70, 40))
                     pygame.display.flip()
+                    nb_sheep = police.render(f"{config.SHEEP_COUNT}", True, NOIR)
+                    fenetre.blit(nb_sheep, (370, 410))
+                    #print(f"bouton mouton : {config.SHEEP_COUNT}")
+                if position_bouton_addCow.collidepoint(event.pos):
+                    config.COW_COUNT+=1
+                    pygame.draw.rect(fenetre, MARRON, pygame.Rect(350, 198, 70, 40))
+                    pygame.display.flip()
+                    nb_cow = police.render(f"{config.COW_COUNT}", True, NOIR)
+                    fenetre.blit(nb_cow, (370, 203))
+                    #print(f"bouton mouton : {config.COW_COUNT}")
+                    
+                    
         pygame.display.update()
 
     home_page()
+    return config.SHEEP_COUNT
 
     
 

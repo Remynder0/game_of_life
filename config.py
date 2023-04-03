@@ -1,6 +1,10 @@
-HEIGHT = 600
-WEIGHT = 900
-COWS_COUNT = 5
+WIDTH = 1080
+HEIGHT = 720
+FPS = 30
+
+
+#########################################
+COW_COUNT = 5
 SHEEP_COUNT = 10
 RABBIT_COUNT = 30
 BEAR_COUNT = 1
