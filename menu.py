@@ -55,7 +55,7 @@ class Setting:
         self.__screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.__background= pygame.transform.scale(background ,(WIDTH,HEIGHT))
 
-    def get_setting(self):
+    def make_button_set(self, name, x, y):
         pass
 
     def affiche_setting(self):

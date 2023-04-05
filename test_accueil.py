@@ -2,6 +2,7 @@ import pygame
 import config
 
 pygame.init()
+pygame.mixer.init()
 
 # Définir les couleurs
 BLANC = (255, 255, 255)
@@ -12,14 +13,24 @@ MARRON = (164, 82, 33)
 WIDTH= config.WIDTH; HEIGHT= config.HEIGHT
 taille_fenetre = (WIDTH, HEIGHT)
 fenetre = pygame.display.set_mode(taille_fenetre)
+pygame.display.set_caption("Jeu de la vie")
 
+pygame.mixer.music.load("Volume Alpha 03. Subwoofer Lullaby.mp3")
+pygame.mixer.music.play(-1)
 
 
 
 def home_page():
-    fond_home = pygame.image.load('image/accueil.png')
+    fond_home = pygame.image.load('image/home.png')
     fond_home = pygame.transform.scale(fond_home ,(WIDTH,HEIGHT))
     fenetre.blit(fond_home, (0,0))
+
+    music_stat=1
+    music=pygame.image.load('image/music_on.png')
+    music=pygame.transform.scale(music ,(60,60))
+    fenetre.blit(music, (20,20))
+
+    
 
     # Définir les dimensions et la position du bouton
     largeur_bouton =  380
@@ -51,8 +62,26 @@ def home_page():
                     print("bouton Settings !")
                     RUN = False
                     setting_page()
+                if music.get_rect().collidepoint(event.pos):
+                    print("bouton music !")
+                    if music_stat==1:
+                        music_stat=0
+                        music=pygame.image.load('image/music_off.png')
+                        music=pygame.transform.scale(music ,(60,60))
+                        fenetre.blit(music, (20,20))
+                        pygame.mixer.music.stop()
+                        
+                    elif music_stat==0:
+                        music_stat=1
+                        music=pygame.image.load('image/music_on.png')
+                        music=pygame.transform.scale(music ,(60,60))
+                        fenetre.blit(music, (20,20))
+                        pygame.mixer.music.play(-1)
+
                 if position_bouton_credits.collidepoint(event.pos):
                     print("bouton Credits !")
+                    RUN = False
+                    credit_page()
                 if position_bouton_quit.collidepoint(event.pos):
                     print("bouton Quit !")
                     RUN = False
@@ -61,7 +90,6 @@ def home_page():
 
 
 def setting_page():
-    print("ok")
     fond_settings = pygame.image.load('image/settings.png')
     fond_settings= pygame.transform.scale(fond_settings ,(WIDTH,HEIGHT))
     fenetre.blit(fond_settings, (0,0))
@@ -70,11 +98,12 @@ def setting_page():
     position_bouton_quit = pygame.Rect(818, 44, 60, 60)
     position_bouton_addSheep = pygame.Rect(490, 399, 30, 50)
     position_bouton_addCow = pygame.Rect(490, 193, 30, 50)
+    position_bouton_removeCow = pygame.Rect(250, 193, 30, 50)
     
     pygame.draw.rect(fenetre, BLANC, position_bouton_quit,1)
     pygame.draw.rect(fenetre, BLANC, position_bouton_addSheep,1)
     pygame.draw.rect(fenetre, BLANC, position_bouton_addCow,1)
-
+    pygame.draw.rect(fenetre, BLANC, position_bouton_removeCow,1)
 
 
     # Définir le texte des options
@@ -112,6 +141,13 @@ def setting_page():
                     nb_cow = police.render(f"{config.COW_COUNT}", True, NOIR)
                     fenetre.blit(nb_cow, (370, 203))
                     #print(f"bouton mouton : {config.COW_COUNT}")
+                if position_bouton_removeCow.collidepoint(event.pos):
+                    if config.COW_COUNT>0:
+                        config.COW_COUNT-=1
+                        pygame.draw.rect(fenetre, MARRON, pygame.Rect(350, 198, 70, 40))
+                        pygame.display.flip()
+                        nb_cow = police.render(f"{config.COW_COUNT}", True, NOIR)
+                        fenetre.blit(nb_cow, (370, 203))
                     
                     
         pygame.display.update()
@@ -120,6 +156,40 @@ def setting_page():
     return config.SHEEP_COUNT
 
     
+def credit_page():
+    fond_settings = pygame.image.load('image/credits.png')
+    fond_settings= pygame.transform.scale(fond_settings ,(WIDTH,HEIGHT))
+    fenetre.blit(fond_settings, (0,0))
+
+    position_bouton_quit = pygame.Rect(725, 140, 60, 60)
+    
+    pygame.draw.rect(fenetre, BLANC, position_bouton_quit,1)
+
+    police = pygame.font.SysFont("Arial", 32)
+    music_source1 = police.render("Subwoofer Lullaby by C418", True, NOIR)
+    music_source2 = police.render("From Minecraft-Volume Alpha n°03", True, NOIR)
+    fenetre.blit(music_source1, (355,460))
+    fenetre.blit(music_source2, (355,490))
+
+
+    RUN=True
+    while RUN:
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                RUN = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    RUN = False
+ 
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if position_bouton_quit.collidepoint(event.pos):
+                    print("bouton Quit !")
+                    RUN = False
+                    
+        pygame.display.update()
+
+    home_page()
 
 
 if __name__ == "__main__":

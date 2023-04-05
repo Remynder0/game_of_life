@@ -191,5 +191,5 @@ class Human(Animal):
 
         
     def crafting():
-        pass
+        pygame.time.Clock()
 
