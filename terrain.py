@@ -8,7 +8,7 @@ from config import *
 class Terrain:
 
 
-    def __init__(self ,background = pygame.image.load('image/accueil.png')):
+    def __init__(self ,background):
         self.__screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.__background= pygame.transform.scale(background ,(WIDTH,HEIGHT))
 
