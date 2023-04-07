@@ -73,7 +73,18 @@ class Animal(Element):
             return "mâle"
         else:   
             return "femelle"
+
+    ############# interaction ###############
+
+    def collide(self):
+        if pygame.sprite.collide_rect(type(Animal), type(Animal)):
+            pass
     
+    def reproduction(self):
+        pass
+
+    def fight(self):
+        pass
 
     ############# point de vie ###############
     def get_life_max(self):
