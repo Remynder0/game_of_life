@@ -1,5 +1,6 @@
 import pygame
 import config
+from beta_terrain import *
 
 pygame.init()
 pygame.mixer.init()
@@ -32,7 +33,7 @@ def home_page():
 
     
 
-    # Définir les dimensions et la position du bouton
+    # Définir les dimensions et la position des boutons
     largeur_bouton =  380
     hauteur_bouton = 69
     position_bouton_NewGame = pygame.Rect(350, 300-2, largeur_bouton, hauteur_bouton)
@@ -58,6 +59,7 @@ def home_page():
                 # Vérifier si le clic est dans le bouton
                 if position_bouton_NewGame.collidepoint(event.pos):
                     print("bouton New Game !")
+                    startGame()
                 if position_bouton_settings.collidepoint(event.pos):
                     print("bouton Settings !")
                     RUN = False
