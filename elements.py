@@ -77,8 +77,7 @@ class Animal(Element):
     ############# interaction ###############
 
     def collide(self):
-        if pygame.sprite.collide_rect(type(Animal), type(Animal)):
-            pass
+        pass
     
     def reproduction(self):
         pass
