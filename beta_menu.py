@@ -20,16 +20,26 @@ pygame.mixer.music.load("Volume Alpha 03. Subwoofer Lullaby.mp3")
 pygame.mixer.music.play(-1)
 
 
+    
+
+
+
 
 def home_page():
     fond_home = pygame.image.load('image/home.png')
     fond_home = pygame.transform.scale(fond_home ,(WIDTH,HEIGHT))
     fenetre.blit(fond_home, (0,0))
 
-    music_stat=1
-    music=pygame.image.load('image/music_on.png')
-    music=pygame.transform.scale(music ,(60,60))
-    fenetre.blit(music, (20,20))
+    
+    if config.MUSIC_STATE:
+        music=pygame.image.load('image/music_on.png')
+        music=pygame.transform.scale(music ,(60,60))
+        fenetre.blit(music, (20,20))        
+    else:
+        music=pygame.image.load('image/music_off.png')
+        music=pygame.transform.scale(music ,(60,60))
+        fenetre.blit(music, (20,20))
+
 
     
 
@@ -66,19 +76,19 @@ def home_page():
                     setting_page()
                 if music.get_rect().collidepoint(event.pos):
                     print("bouton music !")
-                    if music_stat==1:
-                        music_stat=0
+                    if config.MUSIC_STATE:
+                        config.MUSIC_STATE=False
                         music=pygame.image.load('image/music_off.png')
                         music=pygame.transform.scale(music ,(60,60))
                         fenetre.blit(music, (20,20))
-                        pygame.mixer.music.stop()
+                        pygame.mixer.music.set_volume(0)
                         
-                    elif music_stat==0:
-                        music_stat=1
+                    elif config.MUSIC_STATE==0:
+                        config.MUSIC_STATE=True
                         music=pygame.image.load('image/music_on.png')
                         music=pygame.transform.scale(music ,(60,60))
                         fenetre.blit(music, (20,20))
-                        pygame.mixer.music.play(-1)
+                        pygame.mixer.music.set_volume(5)
 
                 if position_bouton_credits.collidepoint(event.pos):
                     print("bouton Credits !")

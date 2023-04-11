@@ -1,7 +1,7 @@
 WIDTH = 1080
 HEIGHT = 720
 FPS = 30
-
+MUSIC_STATE=True
 
 #########################################
 COW_COUNT = 5
