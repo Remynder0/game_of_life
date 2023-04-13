@@ -118,7 +118,7 @@ def startGame():
     ##################################################
 
     # Définir la taille et le nombre de régions
-    TAILLE_REGION = 30
+    TAILLE_REGION = 120
     NB_REGIONS_X = ecran.get_width() // TAILLE_REGION
     NB_REGIONS_Y = ecran.get_height() // TAILLE_REGION
 
@@ -150,7 +150,7 @@ def startGame():
         y = sprite.rect.y // TAILLE_REGION
         regions[(x, y)].append(sprite)
 
-    set_surface = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
+    """set_surface = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
     surface_cadrillage = pygame.Surface((config.WIDTH, config.HEIGHT), pygame.SRCALPHA)
     surface_cadrillage.convert_alpha()
 
@@ -160,7 +160,7 @@ def startGame():
 
     # Dessiner les lignes verticales
     for x in range(TAILLE_REGION, config.WIDTH, TAILLE_REGION):
-        pygame.draw.line(surface_cadrillage, (255, 255, 255, 128), (x, 0), (x, config.HEIGHT), 2)
+        pygame.draw.line(surface_cadrillage, (255, 255, 255, 128), (x, 0), (x, config.HEIGHT), 2)"""
         
     ##################################################
     ##################################################
@@ -237,7 +237,7 @@ def startGame():
         
         ecran.fill((255, 255, 255))
         ecran.blit(fond, (0,0))
-        ecran.blit(surface_cadrillage, (0, 0))
+        #ecran.blit(surface_cadrillage, (0, 0))
 
         #### affichage des sprites ####
         for sprite in liste_sprites:

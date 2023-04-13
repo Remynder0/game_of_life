@@ -17,9 +17,10 @@ class Home:
 
     pygame.init()
     
-    def __init__(self, background = pygame.image.load('image/accueil.png') ):
+    def __init__(self, background = pygame.image.load('image/home.png') ,hauteur_bouton = 69,largeur_bouton = 380):
         self.__screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.__background= pygame.transform.scale(background ,(WIDTH,HEIGHT))
+        self.bouton=(hauteur_bouton,largeur_bouton)
 
 
     def affiche_accueil(self):
@@ -38,11 +39,11 @@ class Home:
 
             pygame.display.update()
     
-    def new_game(self, config):
+    def new_game(self):
         pass
     
     def setting(self):
-        pass
+        settings=Setting()
     
     def credits(self):
         pass
