@@ -1,9 +1,9 @@
 
 import random
 import pygame
+import threading
 import config
-import time
-#from beta_menu import *
+import beta_menu 
 
 pygame.init()
 
@@ -25,6 +25,7 @@ class MonSprite(pygame.sprite.Sprite):
             self.vy = random.randint(-5, 5)
         self.hp=hp
         self.dmg=dmg
+        self.alive = True
 
     def update(self):
         self.rect.x += self.vx
@@ -65,9 +66,8 @@ class MonSprite(pygame.sprite.Sprite):
     def collision(self, other):
         self_vx,self_vy = self.vx,self.vy
         other_vx,other_vy = other.vx,other.vy
-        self.vx,self.vy = 0,0
-        other.vx,other.vy = 0,0
-        pygame.time.delay(1000)
+        """self.vx,self.vy = 0,0
+        other.vx,other.vy = 0,0"""
         groupe_self= self.groups()
         groupe_other = other.groups()
         print(groupe_self)
@@ -75,6 +75,7 @@ class MonSprite(pygame.sprite.Sprite):
             pass
         else:
             self.fight(other)
+        threading.Event().wait(1)
         self.vx,self.vy = -self_vx,-self_vy
         other.vx,other.vy = -other_vx,-other_vy
 
@@ -82,10 +83,11 @@ class MonSprite(pygame.sprite.Sprite):
         other.hp -= self.dmg
         if other.hp <= 0:
             other.kill()
+            self.alive = False
         self.hp -= other.dmg
         if self.hp <= 0:
             self.kill()
-
+            self.alive = False
 
 def startGame():
     fond = pygame.image.load('image/fond.png')
@@ -187,9 +189,13 @@ def startGame():
                     if (x+dx, y+dy) in regions:
                         for other_sprite in regions[(x+dx, y+dy)]:
                             if sprite != other_sprite and sprite.rect.colliderect(other_sprite.rect):
-                                sprite.collision(other_sprite)
                                 groupe_self = sprite.groups()
                                 print("Collision",groupe_self,"->",other_sprite.groups())
+                                t = threading.Thread(sprite.collision(other_sprite))
+                                t.start()
+
+                                
+                                
                                 liste_sprites.update()
                                 
                                 
@@ -203,9 +209,10 @@ def startGame():
                     if (x+dx, y+dy) in regions:
                         for other_sprite in regions[(x+dx, y+dy)]:
                             if sprite!= other_sprite and sprite.rect.colliderect(other_sprite.rect):
-                                sprite.collision(other_sprite)
-                                liste_spritesV.update()
                                 print("Collision",sprite.groups(),"->",other_sprite.groups())
+                                t2 = threading.Thread(sprite.collision(other_sprite))
+                                t2.start()
+                                liste_spritesV.update()
     
         for sprite in liste_spritesM:
             sprite.update_m()
@@ -216,9 +223,11 @@ def startGame():
                     if (x+dx, y+dy) in regions:
                         for other_sprite in regions[(x+dx, y+dy)]:
                             if sprite!= other_sprite and sprite.rect.colliderect(other_sprite.rect):
-                                sprite.collision(other_sprite)
-                                liste_spritesM.update()
                                 print("Collision",sprite.groups(),"->",other_sprite.groups())
+                                t3 = threading.Thread(sprite.collision(other_sprite))
+                                t3.start()
+                                liste_spritesM.update()
+                                
 
         for sprite in liste_spritesO:
             sprite.update_o()
@@ -229,9 +238,11 @@ def startGame():
                     if (x+dx, y+dy) in regions:
                         for other_sprite in regions[(x+dx, y+dy)]:
                             if sprite!= other_sprite and sprite.rect.colliderect(other_sprite.rect):
-                                sprite.collision(other_sprite)
-                                liste_spritesO.update()
                                 print("Collision",sprite.groups(),"->",other_sprite.groups())
+                                t4 = threading.Thread(sprite.collision(other_sprite))
+                                t4.start()
+                                liste_spritesO.update()
+                                
 
         
         
@@ -241,17 +252,18 @@ def startGame():
 
         #### affichage des sprites ####
         for sprite in liste_sprites:
-            if sprite.alive:
+            if sprite in liste_sprites:
                 pygame.draw.rect(ecran, (255, 0, 0), sprite.rect)
         for sprite in liste_spritesV:
-            if sprite.alive:
+            if sprite in liste_spritesV:
                 pygame.draw.rect(ecran, (0, 0, 255), sprite.rect)
         for sprite in liste_spritesM:
-            if sprite.alive:
+            if sprite in liste_spritesM:
                 pygame.draw.rect(ecran, (0, 255, 0), sprite.rect)
         for sprite in liste_spritesO:
-            if sprite.alive:
+            if sprite in liste_spritesO:
                 pygame.draw.rect(ecran, (164, 82, 33), sprite.rect)
+                
         
 
 
@@ -265,7 +277,8 @@ def startGame():
 
     #home_page()
 
-
+if __name__ == "__main__":
+    beta_menu.home_page()
 
 
 
