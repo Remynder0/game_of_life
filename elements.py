@@ -13,12 +13,15 @@ class Element(pygame.sprite.Sprite):
         cls.__ids_counts+=1
 
     
-    def __init__(self,name):
+    def __init__(self ,name ,x ,y):
         super.__init__()
         self.name=name
         self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
         self.__id=self.__ids_counts+1
         Element.incr_ids_counts(Element)
+        
         
     def get_id(self):
         return self.__id
@@ -60,6 +63,10 @@ class Animal(Element):
         self.__gender=random.randint(0, 1)
         self.__bar_life=[life_max,life_max]
         self.__damage = damage
+        self.vx = random.randint(-5, 5)
+        self.vy = random.randint(-5, 5)
+        while self.vy == self.vx:
+            self.vy = random.randint(-5, 5)
 
 
     ############# age/genre #############

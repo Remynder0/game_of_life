@@ -68,14 +68,13 @@ class MonSprite(pygame.sprite.Sprite):
         other_vx,other_vy = other.vx,other.vy
         """self.vx,self.vy = 0,0
         other.vx,other.vy = 0,0"""
+        #self.rect.clamp_ip(other.rect)
         groupe_self= self.groups()
         groupe_other = other.groups()
-        print(groupe_self)
         if groupe_self == groupe_other:
             pass
         else:
             self.fight(other)
-        threading.Event().wait(1)
         self.vx,self.vy = -self_vx,-self_vy
         other.vx,other.vy = -other_vx,-other_vy
 
