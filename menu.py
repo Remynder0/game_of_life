@@ -23,11 +23,12 @@ class Home:
         self.bouton=(largeur_bouton, hauteur_bouton)
 
     def new_game(self):
-        pass
+        terrain = Terrain(120)
+        return terrain
     
     def setting(self):
-        print("ok")
-        settings=Setting()
+        setting = Setting()
+        return setting
     
     def credits(self):
         pass
@@ -66,8 +67,7 @@ class Setting:
     def __init__(self, background = pygame.image.load('image/settings.png') ):
         self.__screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.__background= pygame.transform.scale(background ,(WIDTH,HEIGHT))
-        self.__animal_count = {"cow_count" : COW_COUNT , "pig_count" : PIG_COUNT, "sheep_count" : SHEEP_COUNT, "rabbit_count" : RABBIT_COUNT , "falcon_count" : FALCON_COUNT, "snake_count" : SNAKE_COUNT, "wolf_count" : WOLF_COUNT, "fish_count" : FISH_COUNT}
-
+        self.__animal_count = ANIMALS_COUNT
 
     def add(self, animal):
         self.__animal_count[animal]+=1
@@ -94,8 +94,8 @@ class Setting:
 
         self.__screen.blit(self.__background, (0,0))
         bouton_quit = pygame.Rect(818, 44, 60, 60)
-        bouton_cow = self.make_button_set(COW_COUNT,250,193)
-        bouton_sheep =self.make_button_set(SHEEP_COUNT, 250, 399)
+        bouton_cow = self.make_button_set(self.__animal_count["Cow"],250,193)
+        #bouton_sheep =self.make_button_set(SHEEP_COUNT, 250, 399)
 
         RUN=True
         while RUN:
@@ -115,8 +115,8 @@ class Setting:
                         game.affiche_accueil() 
                     if bouton_cow[0].collidepoint(event.pos): #detection du bouton cow 0 (le bouton add)
                         print("bouton cow add")
-                        self.add("cow_count")    
-                        print(self.__animal_count["cow_count"])
+                        self.add("Cow")    
+                        print(self.__animal_count["Cow"])
             pygame.display.update()
    
 

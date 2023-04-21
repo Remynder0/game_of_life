@@ -1,20 +1,28 @@
+
+from elements import *
+##########################################
 WIDTH = 1080
 HEIGHT = 720
 FPS = 30
 MUSIC_STATE=True
 
 #########################################
-COW_COUNT = 5
-SHEEP_COUNT = 10
-RABBIT_COUNT = 30
-BEAR_COUNT = 1
-SNAKE_COUNT = 10
-WOLF_COUNT = 2
-PIG_COUNT = 20
-FALCON_COUNT = 5
-FISH_COUNT = 20
-CAR_COUNT = 4
+ANIMALS_COUNT = {
+    "Cow" : 5,
+    "Sheep" : 10,
+    "Rabbit" : 30,
+    "Bear" : 1,
+    "Snake" : 10,
+    "Wolf" : 2,
+    "Pig" : 20,
+    "Falcon" : 5,
+    "Fish" : 20,
+    "Car" : 4
+}
 
-THREE_COUNT = 5
-PLANT_COUNT = 20
-STONE_COUNT = 10
+#########################################
+RESSOURCES_COUNT = {
+    "THREE_COUNT" : 5,
+    "PLANT_COUNT" : 20,
+    "STONE_COUNT" : 10
+}
