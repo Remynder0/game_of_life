@@ -13,12 +13,13 @@ class Element(pygame.sprite.Sprite):
         cls.__ids_counts+=1
 
     
-    def __init__(self ,name ,x ,y):
-        super.__init__()
+    def __init__(self ,name, image):
+        super().__init__()
         self.name=name
+        self.image = image.convert_alpha()
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        self.rect.x = 0
+        self.rect.y = 0
         self.__id=self.__ids_counts+1
         Element.incr_ids_counts(Element)
         
@@ -34,30 +35,30 @@ class Resource(Element):
         self.__durability=durability
 
 class Stone(Resource):
-    def __init__(self,name="Stone",durability=10):
+    def __init__(self,name="stone",durability=10):
         super.__init__(durability,name)
         self.__image = pygame.image.load("image/stone.png").convert_alpha()
         
 class Plant(Resource):
-    def __init__(self,name="Plant", durability=2):
+    def __init__(self,name="plant", durability=2):
         super.__init__(durability,name) 
         self.__image = pygame.image.load("image/plant.png").convert_alpha()
 
 class Iron(Resource):
-    def __init__(self,name="Iron",durability=12):
-        super.__init__(durability)
+    def __init__(self,name="iron",durability=12):
+        super.__init__(name, durability)
         self.__image = pygame.image.load("image/stone.png").convert_alpha()
 
 class Three(Resource):
-    def __init__(self,name="Iron", durability=6):
-        super.__init__(durability) 
+    def __init__(self,name="three", durability=6):
+        super.__init__(name, durability) 
         self.__image = pygame.image.load("image/three.png").convert_alpha()
 
 
 class Animal(Element):
 
-    def __init__(self, name, life_max, damage):
-        self.name=name
+    def __init__(self, name, life_max, damage, image):
+        super().__init__(name ,image)
         self.__life_max=life_max
         self.__age=0
         self.__gender=random.randint(0, 1)
@@ -140,70 +141,67 @@ class Animal(Element):
 
 
 class Cow(Animal):
-    def __init__(self, name="Cow", life_max=10, damage=0):
-        super().__init__(name, life_max, damage)
-        self.__image = pygame.image.load("image/cow.png").convert_alpha()
+    def __init__(self, name="Cow", life_max=10, damage=0, image=pygame.image.load("image/cow.png")):
+        super().__init__(name, life_max, damage, image)
+        self.image=pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
 
 
 class Pig(Animal):
-    def __init__(self, name="Pig", life_max=8, damage=0):
-        super().__init__(name, life_max, damage)
-        self.__image = pygame.image.load("image/pig.png").convert_alpha()
-
+    def __init__(self, name="Pig", life_max=8, damage=0, image = pygame.image.load("image/pig.png")):
+        super().__init__(name, life_max, damage, image)
+        self.image=pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
 
 class Sheep(Animal):
-    def __init__(self, name="Sheep", life_max=8, damage=0):
-        super().__init__(name, life_max, damage)
-        self.__image = pygame.image.load("image/sheep.png").convert_alpha()
+    def __init__(self, name="Sheep", life_max=8, damage=0, image = pygame.image.load("image/sheep.png")):
+        super().__init__(name, life_max, damage, image)
+        self.image=pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
 
 
 class Rabbit(Animal):
-    def __init__(self, name="Bunny", life_max=1, damage=0):
-        super().__init__(name, life_max, damage)
-        self.__image = pygame.image.load("image/rabbit.png").convert_alpha()
+    def __init__(self, name="Bunny", life_max=1, damage=0, image = pygame.image.load("image/rabbit.png")):
+        super().__init__(name, life_max, damage, image)
+        self.image=pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
 
 class Fish(Animal):
     __poisson=('Basile','Emile')
-    def __init__(self, name="Fish", life_max=1, damage=0):
-        super().__init__(name, life_max, damage)
-        self.__image = pygame.image.load(f"image/fish{self.__poisson[random.randint(0, 1)]}.png").convert_alpha()
-
+    def __init__(self, name="Fish", life_max=1, damage=0, image = pygame.image.load(f"image/fish{__poisson[random.randint(0, 1)]}.png")):
+        super().__init__(name, life_max, damage, image)
+        self.__image = pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
 
 class Bear(Animal):
-    def __init__(self, name="Bear", life_max=30, damage=5):
-        super().__init__(name, life_max, damage)
-        self.__image = pygame.image.load("image/bear.png").convert_alpha()
+    def __init__(self, name="Bear", life_max=30, damage=5, image = pygame.image.load("image/bear.png")):
+        super().__init__(name, life_max, damage, image)
+        self.__image = pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
 
 class Wolf(Animal):
-    def __init__(self, name="Wolf", life_max=15, damage=3):
-        super().__init__(name, life_max, damage)
-        self.__image = pygame.image.load("image/wolf.png").convert_alpha()
-
+    def __init__(self, name="Wolf", life_max=15, damage=3, image = pygame.image.load("image/wolf.png")):
+        super().__init__(name, life_max, damage, image)
+        self.__image = pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
 class Snake(Animal):
-    def __init__(self, name="Snake", life_max=2, damage=1):
-        super().__init__(name, life_max, damage)
-        self.__image = pygame.image.load("image/snake.png").convert_alpha()
+    def __init__(self, name="Snake", life_max=2, damage=1, image = pygame.image.load("image/snake.png")):
+        super().__init__(name, life_max, damage, image)
+        self.__image = pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
 
     def poisoned():
         pass
 
 
 class Car(Animal):
-    def __init__(self, name="Car", life_max=100, damage=50):
-        super().__init__(name, life_max, damage)
-        self.__image = pygame.image.load("image/car.png").convert_alpha()
+    __voiture=('Blue','Red')
+    def __init__(self, name="Car", life_max=100, damage=50, image = pygame.image.load(f"image/car{__voiture[random.randint(0, 1)]}.png")):
+        super().__init__(name, life_max, damage, image)
+        self.__image = pygame.transform.scale(image, (image.get_width()*0.02, image.get_height()*0.02))
 
 
 class Falcon(Animal):
-    def __init__(self, name="Falcon", life_max=2, damage=2):
-        super().__init__(name, life_max, damage)
-        self.__image = pygame.image.load("image/falcon.png").convert_alpha()
-
+    def __init__(self, name="Falcon", life_max=2, damage=2, image = pygame.image.load("image/falcon.png")):
+        super().__init__(name, life_max, damage, image)
+        self.__image = pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
 
 class Human(Animal):
-    def __init__(self, name="Human", life_max=10, damage=2):
-        super().__init__(name, life_max, damage)
-        self.__image = pygame.image.load("image/gru.png").convert_alpha()
+    def __init__(self, name="Human", life_max=10, damage=2, image = pygame.image.load("image/gru.png")):
+        super().__init__(name, life_max, damage, image)
+        self.__image = pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
         self.__inventory = []
         self.arms=0
         self.tools=0

@@ -37,6 +37,8 @@ class Home:
         
         self.__screen.blit(self.__background, (0,0))
         bouton_settings = pygame.Rect(350, 400-2, self.bouton[0], self.bouton[1])
+        bouton_newgame = pygame.Rect(350, 300-2, self.bouton[0], self.bouton[1])
+
 
 
         RUN=True
@@ -54,7 +56,11 @@ class Home:
                         RUN = False
                         settings=Setting()
                         settings.affiche_setting()
-
+                    if bouton_newgame.collidepoint(event.pos):
+                        print("bouton New Game !")
+                        RUN = False
+                        new_game=self.new_game()
+                        new_game.affichage()
 
             pygame.display.update()
     
