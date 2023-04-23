@@ -73,13 +73,13 @@ class Setting:
     def __init__(self, background = pygame.image.load('image/settings.png') ):
         self.__screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.__background= pygame.transform.scale(background ,(WIDTH,HEIGHT))
-        self.__animal_count = ANIMALS_COUNT
+        self.__element_count = DEFAULT_COUNT
 
-    def add(self, animal):
-        self.__animal_count[animal]+=1
-    def remove(self, animal):
-        if self.__animal_count[animal]>0:
-            self.__animal_count[animal]-=1
+    def add(self, element):
+        self.__element_count[element]+=1
+    def remove(self, element):
+        if self.__element_count[element]>0:
+            self.__element_count[element]-=1
 
     def make_button_set(self, id, x, y):
         police = pygame.font.SysFont("Arial", 50)
@@ -100,7 +100,7 @@ class Setting:
 
         self.__screen.blit(self.__background, (0,0))
         bouton_quit = pygame.Rect(818, 44, 60, 60)
-        bouton_cow = self.make_button_set(self.__animal_count["Cow"],250,193)
+        bouton_cow = self.make_button_set(self.__element_count["Cow"],250,193)
         #bouton_sheep =self.make_button_set(SHEEP_COUNT, 250, 399)
 
         RUN=True
@@ -122,7 +122,7 @@ class Setting:
                     if bouton_cow[0].collidepoint(event.pos): #detection du bouton cow 0 (le bouton add)
                         print("bouton cow add")
                         self.add("Cow")    
-                        print(self.__animal_count["Cow"])
+                        print(self.__element_count["Cow"])
             pygame.display.update()
    
 
@@ -151,7 +151,7 @@ j'ai ajouter un peux de commentaire pour les modifications
 
 Voici un petit memo pour les taches que tu as :
 
-# 1. finir les methodes pour ajouter et enlever un animal (l'affichage surtout)
+# 1. finir les methodes pour ajouter et enlever un element (l'affichage surtout)
 # 2. ajouter aussi une methode pour acceder au nombre d'animaux (regarde dans elements.py il ya une methode "get" quelque chose )
 # 3. faire la class methode credits (il y a une fonction credits dans beta_menu.py)
 # 4. finir les detection de collision des boutons

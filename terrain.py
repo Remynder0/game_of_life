@@ -27,31 +27,50 @@ class Terrain:
         rect = pygame.Rect(x, y, zone.rect.width, zone.rect.height)
         return zone.rect.colliderect(rect)
     
-    def get_random_free_place(self,surface):
+    def get_random_free_place(self,surface, zone):
         for x in range(WIDTH):
             for y in range(HEIGHT):
                 if self.is_free_place(x,y,surface):
                     return x,y
         return None
     
-    def place_ressources(self, ressource):
-        for sprite in ressource:
+    
+    def create_groups(self):
+        #creation des different groupes de elements
+        peacefull_list = pygame.sprite.Group()
+        savaged_list = pygame.sprite.Group()
+        car_list = pygame.sprite.Group()
+        human_list = pygame.sprite.Group()
+        resource_list = pygame.sprite.Group()
+
+        for key in ELEMENTS_COUNT.keys():
+            element=eval(f"{key}()")
+            if element.type == "peacefull":
+                for i in range(ELEMENTS_COUNT[key]):
+                    peacefull_list.add(element)
+            elif element.type == "savaged":
+                for i in range(ELEMENTS_COUNT[key]):
+                    savaged_list.add(element)
+            elif element.type == "car":
+                for i in range(ELEMENTS_COUNT[key]):
+                    car_list.add(element)
+            elif element.type == "resource":
+                for i in range(ELEMENTS_COUNT[key]):
+                    resource_list.add(element)
+            elif element.type == "human":
+                for i in range(ELEMENTS_COUNT[key]):
+                    human_list.add(element)
+
+        return peacefull_list, savaged_list, car_list, human_list
+        
+    
+    def place_elements(self, elements_list):
+
+        for sprite in elements_list:
+            sprite.rect.x,sprite.rect.y = self.get_random_free_place(sprite)
             x = sprite.rect.x // self.area_size
             y = sprite.rect.y // self.area_size
             self.regions[(x, y)].append(sprite)
-
-    def place_animals(self, animals):
-        for key in ANIMALS_COUNT.keys():
-            animal_list = pygame.sprite.Group()
-            for i in range(ANIMALS_COUNT[key]):
-                animal=eval(f"{key}()")
-                animal_list.add(animal)
-            for sprite in animal_list:
-                sprite.rect.x,sprite.rect.y = self.get_random_free_place(sprite)
-                x = sprite.rect.x // self.area_size
-                y = sprite.rect.y // self.area_size
-                self.regions[(x, y)].append(sprite)
-        return animal_list
     
     def peacefull_area(self):
         pass
@@ -63,7 +82,8 @@ class Terrain:
         clock = pygame.time.Clock()
         self.__screen.blit(self.__background, (0,0))
 
-        liste_animals = self.place_animals(ANIMALS_COUNT)
+        liste_elements = self.create_groups()
+        liste_animals = liste_elements[0]
 
         while True:
             for event in pygame.event.get():
