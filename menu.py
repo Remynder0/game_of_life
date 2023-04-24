@@ -77,6 +77,7 @@ class Setting:
 
     def add(self, element):
         self.__element_count[element]+=1
+
     def remove(self, element):
         if self.__element_count[element]>0:
             self.__element_count[element]-=1
@@ -90,6 +91,8 @@ class Setting:
         nb_cow = police.render(f"{id}", True, NOIR)
         self.__screen.blit(nb_cow, (x+intervalle_nb, y+10))
 
+        
+
         pygame.draw.rect(self.__screen, BLANC, bouton_add,1)
         pygame.draw.rect(self.__screen, BLANC, bouton_remove,1)
 
@@ -100,8 +103,16 @@ class Setting:
 
         self.__screen.blit(self.__background, (0,0))
         bouton_quit = pygame.Rect(818, 44, 60, 60)
+        
         bouton_cow = self.make_button_set(self.__element_count["Cow"],250,193)
-        #bouton_sheep =self.make_button_set(SHEEP_COUNT, 250, 399)
+        bouton_pig = self.make_button_set(self.__element_count["Pig"], 250, 297)
+        bouton_sheep = self.make_button_set(self.__element_count["Sheep"], 250, 399)
+        bouton_rabbit = self.make_button_set(self.__element_count["Rabbit"], 250, 501)
+
+        bouton_falcon = self.make_button_set(self.__element_count["Falcon"], 550, 193)
+        bouton_snake = self.make_button_set(self.__element_count["Snake"], 550, 297)
+        bouton_wolf = self.make_button_set(self.__element_count["Wolf"], 550, 399)
+        bouton_fish = self.make_button_set(self.__element_count["Fish"], 550, 501)
 
         RUN=True
         while RUN:
@@ -123,6 +134,40 @@ class Setting:
                         print("bouton cow add")
                         self.add("Cow")    
                         print(self.__element_count["Cow"])
+                    if bouton_cow[1].collidepoint(event.pos):
+                            print("bouton cow remove")
+                            self.remove("Cow")
+                            print(self.__element_count["Cow"])
+                                
+                    if bouton_pig[0].collidepoint(event.pos):
+                        print("bouton pig add")
+                        self.add("Pig")
+                        print(self.__element_count["Pig"])
+                    if bouton_sheep[0].collidepoint(event.pos):
+                        print("bouton sheep add")
+                        self.add("Sheep")
+                        print(self.__element_count["Sheep"])
+                    if bouton_rabbit[0].collidepoint(event.pos):
+                        print("bouton rabbit add")
+                        self.add("Rabbit")
+                        print(self.__element_count["Rabbit"])
+                    if bouton_falcon[0].collidepoint(event.pos):
+                        print("bouton falcon add")
+                        self.add("Falcon")
+                        print(self.__element_count["Falcon"])
+                    if bouton_snake[0].collidepoint(event.pos):
+                        print("bouton snake add")
+                        self.add("Snake")
+                        print(self.__element_count["Snake"])
+                    if bouton_wolf[0].collidepoint(event.pos):
+                        print("bouton wolf add")
+                        self.add("Wolf")
+                        print(self.__element_count["Wolf"])
+                    if bouton_fish[0].collidepoint(event.pos):
+                        print("bouton fish add")
+                        self.add("Fish")
+                        print(self.__element_count["Fish"])
+
             pygame.display.update()
    
 
