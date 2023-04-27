@@ -31,14 +31,16 @@ class Home:
         setting = Setting()
         return setting
     
-    def credits(self):
-        pass
+    def credit(self):
+        credit = Credit()
+        return credit
 
     def affiche_accueil(self):
         
         self.__screen.blit(self.__background, (0,0))
-        bouton_settings = pygame.Rect(350, 400-2, self.bouton[0], self.bouton[1])
         bouton_newgame = pygame.Rect(350, 300-2, self.bouton[0], self.bouton[1])
+        bouton_settings = pygame.Rect(350, 400-2, self.bouton[0], self.bouton[1])
+        bouton_credits = pygame.Rect(350, 500-2, self.bouton[0], self.bouton[1])
         
         
         RUN=True
@@ -56,11 +58,18 @@ class Home:
                         RUN = False
                         settings=Setting()
                         settings.affiche_setting()
+
                     if bouton_newgame.collidepoint(event.pos):
                         print("bouton New Game !")
                         RUN = False
                         new_game=self.new_game()
                         new_game.affichage()
+
+                    if bouton_credits.collidepoint(event.pos):
+                        print("bouton credits !")
+                        RUN = False
+                        crediit = Credit()
+                        crediit.affiche_credits()
 
             pygame.display.update()
     
@@ -206,6 +215,63 @@ class Setting:
             pygame.display.update()
    
 
+
+class Credit:
+
+    def __init__(self, background = pygame.image.load('image/credits.png') ):
+        self.__screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        self.__background= pygame.transform.scale(background ,(WIDTH,HEIGHT))
+    
+    def affiche_credits(self):
+        police = pygame.font.SysFont("Arial", 32)
+        self.__screen.blit(self.__background, (0,0))
+        position_bouton_quit = pygame.Rect(726, 140, 60, 60)
+        pygame.draw.rect(self.__screen, BLANC, position_bouton_quit,1)
+
+
+        music_source1 = police.render("Subwoofer Lullaby by C418", True, NOIR)
+        music_source2 = police.render("From Minecraft-Volume Alpha n°03", True, NOIR)
+        self.__screen.blit(music_source1, (355,460))
+        self.__screen.blit(music_source2, (355,490))
+
+        author1 = police.render("Tom", True, NOIR)
+        author2 = police.render("Eliott", True, NOIR)
+        author3 = police.render("Remy", True, NOIR)
+        author4 = police.render("Kheda", True, NOIR)
+        self.__screen.blit(author1, (355,295))
+        self.__screen.blit(author2, (355,325))
+        self.__screen.blit(author3, (355,355))
+        self.__screen.blit(author4, (355,385))
+        pygame.display.flip()
+
+    
+        RUN=True
+        while RUN:
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    RUN = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        RUN = False
+    
+                elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                    if position_bouton_quit.collidepoint(event.pos):
+                        print("bouton Quit !")
+                        RUN = False
+                        game=Home() 
+                        game.credit()
+                        game.affiche_accueil() 
+                        
+            pygame.display.update()
+
+    #home_page()
+
+
+
+
+
+
 class Game:
     
     def __init__(self, background = pygame.image.load('image/fond.png') ):
@@ -214,6 +280,7 @@ class Game:
 
     def start_game(self):
         pass
+
 
 
 
