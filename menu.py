@@ -121,15 +121,15 @@ class Setting:
         bouton_quit = pygame.Rect(818, 44, 60, 60)
         
         
-        bouton_cow = self.make_button_set(self.__element_count["Cow"],250,196)
-        bouton_pig = self.make_button_set(self.__element_count["Pig"], 250, 300)
-        bouton_sheep = self.make_button_set(self.__element_count["Sheep"], 250, 402)
-        bouton_rabbit = self.make_button_set(self.__element_count["Rabbit"], 250, 510)
+        bouton_cow = self.make_button_set(self.__element_count["Cow"],245,194)
+        bouton_pig = self.make_button_set(self.__element_count["Pig"], 245, 298)
+        bouton_sheep = self.make_button_set(self.__element_count["Sheep"], 245, 400)
+        bouton_rabbit = self.make_button_set(self.__element_count["Rabbit"], 245, 508)
 
-        bouton_falcon = self.make_button_set(self.__element_count["Falcon"], 556, 196)
-        bouton_snake = self.make_button_set(self.__element_count["Snake"], 556, 300)
-        bouton_wolf = self.make_button_set(self.__element_count["Wolf"], 556, 402)
-        bouton_fish = self.make_button_set(self.__element_count["Fish"], 556, 510)
+        bouton_falcon = self.make_button_set(self.__element_count["Falcon"], 555, 194)
+        bouton_snake = self.make_button_set(self.__element_count["Snake"], 555, 298)
+        bouton_wolf = self.make_button_set(self.__element_count["Wolf"], 555, 400)
+        bouton_fish = self.make_button_set(self.__element_count["Fish"], 555, 508)
 
         """boutons = {
             (bouton_cow[0], "cow", "add"),
@@ -162,7 +162,7 @@ class Setting:
                     if bouton_cow[0].collidepoint(event.pos): #detection du bouton cow 0 (le bouton add)
                         print("bouton cow add")
                         self.add("Cow")    
-                        pygame.draw.rect(self.__screen, MARRON, pygame.Rect(350, 198, 80, 41))
+                        pygame.draw.rect(self.__screen, BLANC, pygame.Rect(350, 198, 80, 40))
                         pygame.display.flip()
                         nb_cow = police.render(f"{self.__element_count['Cow']}", True, NOIR)
                         self.__screen.blit(nb_cow, (370, 200))
@@ -170,7 +170,7 @@ class Setting:
                     if bouton_cow[1].collidepoint(event.pos):
                             print("bouton cow remove")
                             self.remove("Cow")
-                            pygame.draw.rect(self.__screen, MARRON, pygame.Rect(350, 198, 80, 41))
+                            pygame.draw.rect(self.__screen, MARRON, pygame.Rect(350, 198, 80, 40))
                             pygame.display.flip()
                             nb_cow = police.render(f"{self.__element_count['Cow']}", True, NOIR)
                             self.__screen.blit(nb_cow, (370, 200))
@@ -223,25 +223,25 @@ class Credit:
         self.__background= pygame.transform.scale(background ,(WIDTH,HEIGHT))
     
     def affiche_credits(self):
-        police = pygame.font.SysFont("Arial", 32)
+        police = pygame.font.SysFont("Arial", 33)
         self.__screen.blit(self.__background, (0,0))
-        position_bouton_quit = pygame.Rect(726, 140, 60, 60)
+        position_bouton_quit = pygame.Rect(788, 95, 60, 60)
         pygame.draw.rect(self.__screen, BLANC, position_bouton_quit,1)
 
 
         music_source1 = police.render("Subwoofer Lullaby by C418", True, NOIR)
         music_source2 = police.render("From Minecraft-Volume Alpha n°03", True, NOIR)
-        self.__screen.blit(music_source1, (355,460))
-        self.__screen.blit(music_source2, (355,490))
+        self.__screen.blit(music_source1, (290,460))
+        self.__screen.blit(music_source2, (290,500))
 
         author1 = police.render("Tom", True, NOIR)
-        author2 = police.render("Eliott", True, NOIR)
-        author3 = police.render("Remy", True, NOIR)
+        author2 = police.render("Remy", True, NOIR)
+        author3 = police.render("Eliott", True, NOIR)
         author4 = police.render("Kheda", True, NOIR)
-        self.__screen.blit(author1, (355,295))
-        self.__screen.blit(author2, (355,325))
-        self.__screen.blit(author3, (355,355))
-        self.__screen.blit(author4, (355,385))
+        self.__screen.blit(author1, (300,265))
+        self.__screen.blit(author2, (300,305))
+        self.__screen.blit(author3, (300,345))
+        self.__screen.blit(author4, (300,385))
         pygame.display.flip()
 
     
