@@ -1,6 +1,7 @@
 #### importation ######
 import random
 import pygame
+import time
 
 class Element(pygame.sprite.Sprite):
 
@@ -151,32 +152,32 @@ class Cow(Animal):
     def __init__(self, name="Cow", life_max=10, damage=0, image=pygame.image.load("image/cow.png")):
         super().__init__(name, life_max, damage, image)
         self.type="peacefull"
-        self.image=pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
+        self.image=pygame.transform.scale(image, (image.get_width()*0.55, image.get_height()*0.55))
 
 class Pig(Animal):
     def __init__(self, name="Pig", life_max=8, damage=0, image = pygame.image.load("image/pig.png")):
         super().__init__(name, life_max, damage, image)
         self.type="peacefull"
-        self.image=pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
+        self.image=pygame.transform.scale(image, (image.get_width()*0.5, image.get_height()*0.5))
 
 class Sheep(Animal):
     def __init__(self, name="Sheep", life_max=8, damage=0, image = pygame.image.load("image/sheep.png")):
         super().__init__(name, life_max, damage, image)
         self.type="peacefull"
-        self.image=pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
+        self.image=pygame.transform.scale(image, (image.get_width()*1, image.get_height()*1))
 
 class Rabbit(Animal):
     def __init__(self, name="Bunny", life_max=1, damage=0, image = pygame.image.load("image/rabbit.png")):
         super().__init__(name, life_max, damage, image)
         self.type="peacefull"
-        self.image=pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
+        self.image=pygame.transform.scale(image, (image.get_width()*0.7, image.get_height()*0.7))
 
 class Fish(Animal):
     __poisson=('Basile','Emile')
-    def __init__(self, name="Fish", life_max=1, damage=0, image = pygame.image.load(f"image/fish{__poisson[random.randint(0, 1)]}.png")):
+    def __init__(self, name="Fish", life_max=1, damage=0, image = pygame.image.load(f"image/fish{random.choice(__poisson)}.png")):
         super().__init__(name, life_max, damage, image)
         self.type="peacefull"
-        self.__image = pygame.transform.scale(image, (image.get_width()*2, image.get_height()*2))
+        self.__image = pygame.transform.scale(image, (image.get_width()*0.0003, image.get_height()*0.0003))
 
 class Bear(Animal):
     def __init__(self, name="Bear", life_max=30, damage=5, image = pygame.image.load("image/bear.png")):
