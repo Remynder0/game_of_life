@@ -10,13 +10,13 @@ MUSIC_STATE=True
 
 DEFAULT_COUNT = {
 
-    "Cow" : 5,
-    "Sheep" : 10,
-    "Rabbit" : 30,
-    "Pig" : 20,
-    "Fish" : 20,
+    "Cow" : 2,
+    "Sheep" : 3,
+    "Rabbit" : 5,
+    "Pig" : 2,
+    "Fish" : 6,
 
-    "Snake" : 10,
+    "Snake" : 6,
     "Wolf" : 2,
     "Falcon" : 5,
     "Bear" : 1,
