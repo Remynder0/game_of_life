@@ -77,7 +77,7 @@ class Terrain:
                 if sprite.color == 'Red':
                     sprite.rect.x,sprite.rect.y =(815, 0)
                 else :
-                    sprite.rect.x,sprite.rect.y =(750, 600)
+                    sprite.rect.x,sprite.rect.y =(750, 590)
 
             elif type(sprite)==Bear:
                 sprite.rect.x,sprite.rect.y = self.get_random_place([[0,200],[0,200]])
@@ -100,16 +100,17 @@ class Terrain:
                 sprite.vy = -sprite.vy
         
         elif type(sprite) == Car:
+            #print(self.__screen.get_height()+100,sprite.rect.bottom)
             if sprite.rect.top < 0 :
                 sprite.rect.y = self.__screen.get_height()-sprite.image.get_height()
-            elif sprite.rect.bottom > self.__screen.get_height()+sprite.image.get_height():
+            elif sprite.rect.bottom > 900:
                 sprite.rect.y = 0
 
-
-        if sprite.rect.left < 0 or sprite.rect.right > self.__screen.get_width():
-            sprite.vx = -sprite.vx
-        if sprite.rect.top < 0 or sprite.rect.bottom > self.__screen.get_height():
-            sprite.vy = -sprite.vy
+        else:
+            if sprite.rect.left < 0 or sprite.rect.right-100 > self.__screen.get_width():
+                sprite.vx = -sprite.vx
+            if sprite.rect.top < 0 or sprite.rect.bottom-100 > self.__screen.get_height():
+                sprite.vy = -sprite.vy
 
 
     def detect_collisions(self):
@@ -140,6 +141,10 @@ class Terrain:
         self.place_elements(liste_savaged)
         self.place_elements(liste_car)
         self.place_elements(human)
+        for sprite in liste_car:
+            print(sprite.image.get_rect())
+            print(sprite.image.get_height())
+
 
         while True:
             for event in pygame.event.get():
@@ -151,7 +156,7 @@ class Terrain:
 
             all_sprites = pygame.sprite.Group(liste_peacefull, liste_savaged, liste_car, human)
             # affichage des sprites
-            for sprite in all_sprites:
+            for sprite in liste_car:
                 self.update(sprite)
                 self.__screen.blit(sprite.image, (sprite.rect.x, sprite.rect.y))
                 

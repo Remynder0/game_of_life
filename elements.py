@@ -210,11 +210,12 @@ class Car(Animal):
         self.color = ('Blue', 'Red')
         self.color = random.choice(self.color)
         if self.color == 'Red':
-            self.vy = 5
+            self.vy = random.randint(2,5)
         else :
             self.vy = -5
         self.image = pygame.image.load(f"image/car{self.color}.png")
         self.image = pygame.transform.scale(self.image, (self.image.get_width() * 0.4, self.image.get_height() * 0.4))
+        print(self.image.get_rect())
 
 
 
