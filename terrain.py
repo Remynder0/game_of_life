@@ -35,8 +35,8 @@ class Terrain:
         return None
     
     def get_random_place(self,zone):
-        x= random.randint(0,WIDTH)
-        y=random.randint(0,HEIGHT)
+        x= random.randint(zone[0][0],zone[0][1])
+        y=random.randint(zone[1][0],zone[1][1])
         return x,y                  
 
     
@@ -57,13 +57,13 @@ class Terrain:
                 elif element.type == "savaged":
                     for i in range(ELEMENTS_COUNT[key]):
                         savaged_list.add(element)
-                elif element.type == "car":
+                elif type(element) == Car:
                     for i in range(ELEMENTS_COUNT[key]):
                         car_list.add(element)
                 elif element.type == "resource":
                     for i in range(ELEMENTS_COUNT[key]):
                         resource_list.add(element)
-                elif element.type == "human":
+                elif type(element) == Human:
                     for i in range(ELEMENTS_COUNT[key]):
                         human_list.add(element)
 
@@ -73,33 +73,78 @@ class Terrain:
     def place_elements(self, elements_list):
 
         for sprite in elements_list:
-            sprite.rect.x,sprite.rect.y = self.get_random_place([0,500])
-            print(sprite.rect.x,sprite.rect.y)
+            if type(sprite) == Car:
+                if sprite.color == 'Red':
+                    sprite.rect.x,sprite.rect.y =(815, 0)
+                else :
+                    sprite.rect.x,sprite.rect.y =(750, 590)
+
+            elif type(sprite)==Bear:
+                sprite.rect.x,sprite.rect.y = self.get_random_place([[0,200],[0,200]])
+            else :
+                sprite.rect.x,sprite.rect.y = self.get_random_place([[200,WIDTH-100],[200,HEIGHT-100]])
+
+            #print(sprite.rect.x,sprite.rect.y)
             x = sprite.rect.x // self.area_size
             y = sprite.rect.y // self.area_size
             self.regions[(x, y)].append(sprite)
 
-    def update(self):
-        self.rect.x += self.vx
-        self.rect.y += self.vy
-        if self.rect.left < 0 or self.rect.right > self.__screen.get_width():
-            self.vx = -self.vx
-        if self.rect.top < 0 or self.rect.bottom > self.__screen.get_height():
-            self.vy = -self.vy
-    
-    def peacefull_area(self):
-        pass
-    
-    def dangerous_area(self):
-        pass
+    def update(self, sprite):        
+        sprite.rect.x += sprite.vx
+        sprite.rect.y += sprite.vy
+        
+        if type(sprite)==Bear:
+            if sprite.rect.left < 0 or sprite.rect.right > 300:
+                sprite.vx = -sprite.vx
+            if sprite.rect.top < 0 or sprite.rect.bottom > 300:
+                sprite.vy = -sprite.vy
+        
+        elif type(sprite) == Car:
+            #print(self.__screen.get_height()+100,sprite.rect.bottom)
+            if sprite.rect.top < 0 :
+                sprite.rect.y = self.__screen.get_height()-sprite.image.get_height()
+            elif sprite.rect.bottom > 900:
+                sprite.rect.y = 0
+
+        else:
+            if sprite.rect.left < 0 or sprite.rect.right-100 > self.__screen.get_width():
+                sprite.vx = -sprite.vx
+            if sprite.rect.top < 0 or sprite.rect.bottom-100 > self.__screen.get_height():
+                sprite.vy = -sprite.vy
+
+
+    def detect_collisions(self):
+        all_sprites = pygame.sprite.Group(self.peacefull_list, self.savaged_list, self.car_list, self.human_list, self.resource_list)
+
+        for sprite1 in all_sprites:
+            for sprite2 in all_sprites:
+                if sprite1 != sprite2 and sprite1.rect.colliderect(sprite2.rect):
+                    pass
+
+
+
+
+
+
 
     def affichage(self):
         clock = pygame.time.Clock()
         self.__screen.blit(self.__background, (0,0))
 
         liste_elements = self.create_groups()
-        liste_animals = liste_elements[0]
-        self.place_elements(liste_animals)
+        liste_peacefull = liste_elements[0]
+        liste_savaged = liste_elements[1]
+        liste_car = liste_elements[2]
+        human= liste_elements[3]
+
+        self.place_elements(liste_peacefull)
+        self.place_elements(liste_savaged)
+        self.place_elements(liste_car)
+        self.place_elements(human)
+        for sprite in liste_car:
+            print(sprite.image.get_rect())
+            print(sprite.image.get_height())
+
 
         while True:
             for event in pygame.event.get():
@@ -109,26 +154,15 @@ class Terrain:
                     
             self.__screen.blit(self.__background, (0,0))
 
-            # Tester les collisions pour les sprites dans les régions adjacentes
-            for sprite in liste_animals:
-                sprite.update()
+            all_sprites = pygame.sprite.Group(liste_peacefull, liste_savaged, liste_car, human)
+            # affichage des sprites
+            for sprite in liste_car:
+                self.update(sprite)
                 self.__screen.blit(sprite.image, (sprite.rect.x, sprite.rect.y))
+                
+            #self.detect_collisions()
+                    
             
-                x = sprite.rect.x // self.area_size
-                y = sprite.rect.y // self.area_size
-                for dx in [-1, 0, 1]:
-                    for dy in [-1, 0, 1]:
-                        if (x+dx, y+dy) in self.regions:
-                            for other_sprite in self.regions[(x+dx, y+dy)]:
-                                if sprite != other_sprite and sprite.rect.colliderect(other_sprite.rect):
-                                    groupe_self = sprite.groups()
-                                    #print("Collision",groupe_self,"->",other_sprite.groups())
-
-                                    liste_animals.update()
-
             
-
-            
-
             pygame.display.flip()
             clock.tick(60)
