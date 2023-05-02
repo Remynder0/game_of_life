@@ -113,13 +113,12 @@ class Terrain:
                 sprite.vy = -sprite.vy
 
 
-    def detect_collisions(self):
-        all_sprites = pygame.sprite.Group(self.peacefull_list, self.savaged_list, self.car_list, self.human_list, self.resource_list)
+    def detect_collisions(self, list_sprite):
 
-        for sprite1 in all_sprites:
-            for sprite2 in all_sprites:
+        for sprite1 in list_sprite:
+            for sprite2 in list_sprite:
                 if sprite1 != sprite2 and sprite1.rect.colliderect(sprite2.rect):
-                    pass
+                    print(f"||{type(sprite1)}|| --> ||{type(sprite2)}||")
 
 
 
@@ -131,20 +130,21 @@ class Terrain:
         clock = pygame.time.Clock()
         self.__screen.blit(self.__background, (0,0))
 
+
+        #création des groups
         liste_elements = self.create_groups()
         liste_peacefull = liste_elements[0]
         liste_savaged = liste_elements[1]
         liste_car = liste_elements[2]
         human= liste_elements[3]
-
+        all_sprites = pygame.sprite.Group(liste_peacefull, liste_savaged, liste_car, human)
+        
+        #placement des sprites
         self.place_elements(liste_peacefull)
         self.place_elements(liste_savaged)
         self.place_elements(liste_car)
         self.place_elements(human)
-        for sprite in liste_car:
-            print(sprite.image.get_rect())
-            print(sprite.image.get_height())
-
+        
 
         while True:
             for event in pygame.event.get():
@@ -154,13 +154,13 @@ class Terrain:
                     
             self.__screen.blit(self.__background, (0,0))
 
-            all_sprites = pygame.sprite.Group(liste_peacefull, liste_savaged, liste_car, human)
+            
             # affichage des sprites
-            for sprite in liste_car:
+            for sprite in all_sprites:
                 self.update(sprite)
                 self.__screen.blit(sprite.image, (sprite.rect.x, sprite.rect.y))
                 
-            #self.detect_collisions()
+            self.detect_collisions(all_sprites)
                     
             
             
