@@ -169,7 +169,9 @@ class Setting:
         police = pygame.font.SysFont("Arial", 45)
         self.__screen.blit(self.__background, (0,0))
         bouton_quit = pygame.Rect(818, 44, 60, 60)
-        
+
+
+        ############################ Création des boutons #################################
         bouton_cow = self.make_button_set(self.__element_count["Cow"],245,194)
         bouton_pig = self.make_button_set(self.__element_count["Pig"], 245, 298)
         bouton_sheep = self.make_button_set(self.__element_count["Sheep"], 245, 400)
@@ -181,6 +183,8 @@ class Setting:
         bouton_fish = self.make_button_set(self.__element_count["Fish"], 555, 508)
 
         ok = self.make_button_set("OK", 398, 580)
+
+        ##############################################################################
 
 
         RUN=True
@@ -204,7 +208,7 @@ class Setting:
                     if bouton_cow[0].collidepoint(event.pos): #detection du bouton animal 0 (le bouton add)
                         print("bouton cow add")
                         self.add("Cow")    
-                        pygame.draw.rect(self.__screen, MARRON, pygame.Rect(350, 198, 80, 40))
+                        pygame.draw.rect(self.__screen, MARRON, pygame.Rect(350, 198, 80, 40)) # mettre un rectangle marron par dessus l'ecriture existante
                         pygame.display.flip()
                         self.make_button_set(self.__element_count["Cow"],245,194)
 
