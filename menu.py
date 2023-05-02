@@ -13,6 +13,7 @@ NOIR = (0, 0, 0)
 MARRON = (164, 82, 33)
 
 
+#===============================================================================================================================
 
 class Home:
 
@@ -119,8 +120,9 @@ class Home:
 
             pygame.display.update()
     
-    
 
+    
+#===============================================================================================================================
 
 
 class Setting:
@@ -128,15 +130,15 @@ class Setting:
     def __init__(self, background = pygame.image.load('image/settings.png') ):
         self.__screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.__background= pygame.transform.scale(background ,(WIDTH,HEIGHT))
-        self.__element_count = DEFAULT_COUNT
-        
+        self.__element_count = DEFAULT_COUNT.copy()  #Faire une copie du Default_count pour que __element_count ne prends pas la nouvelle valeur comme valeur maximale
+                                                             
 
     ###### fonction pour ajouter/enlever un animal ######
     def get_nb_count(self,element):
         return self.__element_count[element]
 
     def add(self, element):
-        if self.__element_count[element] >= 0 and self.get_nb_count(element) > self.__element_count[element]:
+        if self.__element_count[element] >= 0 and self.get_nb_count(element) < DEFAULT_COUNT[element]:    #sans faire la copie, _element_count et Default_count pointe sur le même dictionnaire 
             self.__element_count[element]+=1
         
     def remove(self, element):
@@ -316,7 +318,9 @@ class Setting:
                          
             pygame.display.update()
    
+   
 
+#===============================================================================================================================
 
 class Credit:
 
