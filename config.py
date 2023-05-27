@@ -19,8 +19,6 @@ DEFAULT_COUNT = {
     "Wolf" : 2,
     "Falcon" : 5,
     "Bear" : 1,
-    
-    "Car" : 2,
 
     "Human" : 1,
 
@@ -43,8 +41,6 @@ ELEMENTS_COUNT = {
     "Falcon" : DEFAULT_COUNT["Falcon"],
     "Bear" : 1,
     
-    "Car" : 2,
-
     "Human" : 1,
 
     "Three" : 5,

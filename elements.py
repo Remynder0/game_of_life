@@ -203,22 +203,6 @@ class Falcon(Animal):
         self.image = pygame.transform.scale(image, (image.get_width()*0.8, image.get_height()*0.8))
         
 
-class Car(Animal):
-    def __init__(self, name="Car", life_max=100, damage=50, image = pygame.image.load(f"image/carBlue.png"), vx=0):
-        super().__init__(name, life_max, damage, image, vx)
-        self.type = "car"
-        self.color = ('Blue', 'Red')
-        self.color = random.choice(self.color)
-        if self.color == 'Red':
-            self.vy = random.randint(2,5)
-        else :
-            self.vy = -5
-        self.image = pygame.image.load(f"image/car{self.color}.png")
-        self.image = pygame.transform.scale(self.image, (self.image.get_width() * 0.4, self.image.get_height() * 0.4))
-        print(self.image.get_rect())
-
-
-
 
 class Human(Animal):
     def __init__(self, name="Gru", life_max=10, damage=2, image = pygame.image.load("image/gru.png")):

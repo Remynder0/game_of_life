@@ -44,7 +44,6 @@ class Terrain:
         #creation des different groupes de elements
         peacefull_list = pygame.sprite.Group()
         savaged_list = pygame.sprite.Group()
-        car_list = pygame.sprite.Group()
         human_list = pygame.sprite.Group()
         resource_list = pygame.sprite.Group()
         print(ELEMENTS_COUNT.keys())
@@ -57,9 +56,6 @@ class Terrain:
                 elif element.type == "savaged":
                     for i in range(ELEMENTS_COUNT[key]):
                         savaged_list.add(element)
-                elif type(element) == Car:
-                    for i in range(ELEMENTS_COUNT[key]):
-                        car_list.add(element)
                 elif element.type == "resource":
                     for i in range(ELEMENTS_COUNT[key]):
                         resource_list.add(element)
@@ -67,19 +63,13 @@ class Terrain:
                     for i in range(ELEMENTS_COUNT[key]):
                         human_list.add(element)
 
-        return peacefull_list, savaged_list, car_list, human_list
+        return peacefull_list, savaged_list, human_list
         
     
     def place_elements(self, elements_list):
 
         for sprite in elements_list:
-            if type(sprite) == Car:
-                if sprite.color == 'Red':
-                    sprite.rect.x,sprite.rect.y =(815, 0)
-                else :
-                    sprite.rect.x,sprite.rect.y =(750, 590)
-
-            elif type(sprite)==Bear:
+            if type(sprite)==Bear:
                 sprite.rect.x,sprite.rect.y = self.get_random_place([[0,200],[0,200]])
             else :
                 sprite.rect.x,sprite.rect.y = self.get_random_place([[200,WIDTH-100],[200,HEIGHT-100]])
@@ -98,13 +88,6 @@ class Terrain:
                 sprite.vx = -sprite.vx
             if sprite.rect.top < 0 or sprite.rect.bottom > 300:
                 sprite.vy = -sprite.vy
-        
-        elif type(sprite) == Car:
-            #print(self.__screen.get_height()+100,sprite.rect.bottom)
-            if sprite.rect.top < 0 :
-                sprite.rect.y = self.__screen.get_height()-sprite.image.get_height()
-            elif sprite.rect.bottom > 900:
-                sprite.rect.y = 0
 
         else:
             if sprite.rect.left < 0 or sprite.rect.right-100 > self.__screen.get_width():
@@ -135,14 +118,12 @@ class Terrain:
         liste_elements = self.create_groups()
         liste_peacefull = liste_elements[0]
         liste_savaged = liste_elements[1]
-        liste_car = liste_elements[2]
-        human= liste_elements[3]
-        all_sprites = pygame.sprite.Group(liste_peacefull, liste_savaged, liste_car, human)
+        human= liste_elements[2]
+        all_sprites = pygame.sprite.Group(liste_peacefull, liste_savaged, human)
         
         #placement des sprites
         self.place_elements(liste_peacefull)
         self.place_elements(liste_savaged)
-        self.place_elements(liste_car)
         self.place_elements(human)
         
 
